@@ -1,0 +1,464 @@
+{
+    "schema": [
+        {
+            "label": "person",
+            "primary": "id",
+            "type": "VERTEX",
+            "properties": [
+                {
+                    "name": "is_confirmed",
+                    "type": "BOOL",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                },
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": true,
+                    "unique": true
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                },
+                {
+                    "name": "confirmed_at",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                }
+            ]
+        },
+        {
+            "label": "address",
+            "primary": "id",
+            "type": "VERTEX",
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": true,
+                    "unique": true
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                },
+                {
+                    "name": "street_id",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                }
+            ]
+        },
+        {
+            "label": "street",
+            "primary": "id",
+            "type": "VERTEX",
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": true,
+                    "unique": true
+                },
+                {
+                    "name": "incremental_id",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                },
+                {
+                    "name": "city_id",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                }
+            ]
+        },
+        {
+            "label": "city",
+            "primary": "id",
+            "type": "VERTEX",
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": true,
+                    "unique": true
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                },
+                {
+                    "name": "province_id",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                }
+            ]
+        },
+        {
+            "label": "province",
+            "primary": "id",
+            "type": "VERTEX",
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": true,
+                    "unique": true
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                }
+            ]
+        },
+        {
+            "label": "district",
+            "primary": "id",
+            "type": "VERTEX",
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": true,
+                    "unique": true
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                },
+                {
+                    "name": "city_id",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                }
+            ]
+        },
+        {
+            "label": "town",
+            "primary": "id",
+            "type": "VERTEX",
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": true,
+                    "unique": true
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                },
+                {
+                    "name": "district_id",
+                    "type": "STRING",
+                    "optional": true,
+                    "index": false,
+                    "unique": false
+                }
+            ]
+        },
+        {
+            "label": "person_live_with_person",
+            "type": "EDGE",
+            "properties": [
+                {
+                    "name": "start_time",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": false,
+                    "unique": false
+                },
+                {
+                    "name": "end_time",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": false,
+                    "unique": false
+                }
+            ],
+            "constraints": [
+                [
+                    "person",
+                    "person"
+                ]
+            ]
+        },
+        {
+            "label": "person_visit_address",
+            "type": "EDGE",
+            "properties": [
+                {
+                    "name": "start_time",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": false,
+                    "unique": false
+                },
+                {
+                    "name": "end_time",
+                    "type": "STRING",
+                    "optional": false,
+                    "index": false,
+                    "unique": false
+                }
+            ],
+            "constraints": [
+                [
+                    "person",
+                    "address"
+                ]
+            ]
+        },
+        {
+            "label": "province_to_city",
+            "type": "EDGE",
+            "properties": [],
+            "constraints": [
+                [
+                    "province",
+                    "city"
+                ]
+            ]
+        },
+        {
+            "label": "city_to_district",
+            "type": "EDGE",
+            "properties": [],
+            "constraints": [
+                [
+                    "city",
+                    "district"
+                ]
+            ]
+        },
+        {
+            "label": "district_to_town",
+            "type": "EDGE",
+            "properties": [],
+            "constraints": [
+                [
+                    "district",
+                    "town"
+                ]
+            ]
+        },
+        {
+            "label": "town_to_street",
+            "type": "EDGE",
+            "properties": [],
+            "constraints": [
+                [
+                    "town",
+                    "street"
+                ]
+            ]
+        },
+        {
+            "label": "street_to_address",
+            "type": "EDGE",
+            "properties": [],
+            "constraints": [
+                [
+                    "street",
+                    "address"
+                ]
+            ]
+        }
+    ],
+    "files": [
+      {
+        "path": "../data/CovidDemo_csv/person.csv",
+        "format": "CSV",
+        "label": "person",
+        "header": 1,
+        "columns": [
+            "is_confirmed","id","name","confirmed_at"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/province.csv",
+        "format": "CSV",
+        "label": "province",
+        "header": 1,
+        "columns": [
+            "id","name"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/address.csv",
+        "format": "CSV",
+        "label": "address",
+        "header": 1,
+        "columns": [
+            "id","name","street_id"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/city.csv",
+        "format": "CSV",
+        "label": "city",
+        "header": 1,
+        "columns": [
+            "id","name","province_id"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/district.csv",
+        "format": "CSV",
+        "label": "district",
+        "header": 1,
+        "columns": [
+            "id","name","city_id"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/street.csv",
+        "format": "CSV",
+        "label": "street",
+        "header": 1,
+        "columns": [
+            "id","incremental_id","name","city_id"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/town.csv",
+        "format": "CSV",
+        "label": "town",
+        "header": 1,
+        "columns": [
+            "id","name","district_id"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/person_visit_address_person_address.csv",
+        "format": "CSV",
+        "label": "person_visit_address",
+        "header": 1,
+        "SRC_ID": "person",
+        "DST_ID": "address",
+        "columns": [
+          "SRC_ID",
+          "DST_ID","start_time","end_time"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/person_live_with_person_person_person.csv",
+        "format": "CSV",
+        "label": "person_live_with_person",
+        "header": 1,
+        "SRC_ID": "person",
+        "DST_ID": "person",
+        "columns": [
+          "SRC_ID",
+          "DST_ID","start_time","end_time"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/district_to_town_district_town.csv",
+        "format": "CSV",
+        "label": "district_to_town",
+        "header": 1,
+        "SRC_ID": "district",
+        "DST_ID": "town",
+        "columns": [
+          "SRC_ID",
+          "DST_ID"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/province_to_city_province_city.csv",
+        "format": "CSV",
+        "label": "province_to_city",
+        "header": 1,
+        "SRC_ID": "province",
+        "DST_ID": "city",
+        "columns": [
+          "SRC_ID",
+          "DST_ID"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/city_to_district_city_district.csv",
+        "format": "CSV",
+        "label": "city_to_district",
+        "header": 1,
+        "SRC_ID": "city",
+        "DST_ID": "district",
+        "columns": [
+          "SRC_ID",
+          "DST_ID"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/street_to_address_street_address.csv",
+        "format": "CSV",
+        "label": "street_to_address",
+        "header": 1,
+        "SRC_ID": "street",
+        "DST_ID": "address",
+        "columns": [
+          "SRC_ID",
+          "DST_ID"
+        ]
+      },
+      {
+        "path": "../data/CovidDemo_csv/town_to_street_town_street.csv",
+        "format": "CSV",
+        "label": "town_to_street",
+        "header": 1,
+        "SRC_ID": "town",
+        "DST_ID": "street",
+        "columns": [
+          "SRC_ID",
+          "DST_ID"
+        ]
+      }
+    ]
+  }
+  

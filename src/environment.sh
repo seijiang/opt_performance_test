@@ -31,12 +31,28 @@ cp $WORKSPACE/opt_performance_test/src/import_moviedemo.json $WORKSPACE/tugraph-
 cd $WORKSPACE/tugraph-db/demo/movie
 mkdir -p /var/lib/lgraph/
 $WORKSPACE/tugraph-db/build/output/lgraph_import --dir /var/lib/lgraph/ --verbose 2 -c import_moviedemo.json  --continue_on_error 1 --overwrite 1 --online false
-# lgraph_import --dir /var/lib/lgraph/ --verbose 2 -c import_moviedemo.json  --continue_on_error 1 --overwrite 1 --online false
+
+cd $WORKSPACE/opt_performance_test
+mkdir data && cd data
+git clone https://github.com/seijiang/Graph-for-Cypher.git
+cp -r Graph-for-Cypher/graph_data/CovidDemo/csv/ .
+mv csv CovidDemo_csv
+rm -rf Graph-for-Cypher
+cd $WORKSPACE/opt_performance_test/src
+$WORKSPACE/tugraph-db/build/output/lgraph_import --dir /var/lib/lgraph/ --verbose 2 -c import_coviddemo.json -g CovidDemo --continue_on_error 1 --overwrite 1 --online false
 rm -rf import_tmp
 
 # 构建CppRpcClientDemo
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$WORKSPACE/tugraph-db/include
 export LIBRARY_PATH=$LIBRARY_PATH:$WORKSPACE/tugraph-db/build/output
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$WORKSPACE/tugraph-db/build/output
-cd $WORKSPACE/opt_performance_test/src/CppRpcClient
+cd $WORKSPACE/opt_performance_test/src/CppRpcClient_no_opt
 mkdir build && cd build && cmake .. && make
+
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$WORKSPACE/tugraph-db-opt/include
+export LIBRARY_PATH=$LIBRARY_PATH:$WORKSPACE/tugraph-db-opt/build/output
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$WORKSPACE/tugraph-db-opt/build/output
+cd $WORKSPACE/opt_performance_test/src/CppRpcClient_opt
+mkdir build && cd build && cmake .. && make
+cd $WORKSPACE/opt_performance_test
+mkdir output
