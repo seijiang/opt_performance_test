@@ -1,5 +1,14 @@
+if [ $# -ge 1 ] ; then
+    WORKSPACE=$1
+else
+    WORKSPACE=/root
+fi
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$WORKSPACE/tugraph-db-opt/include
+export LIBRARY_PATH=$LIBRARY_PATH:$WORKSPACE/tugraph-db-opt/build/output
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$WORKSPACE/tugraph-db-opt/build/output
+
 cd $WORKSPACE/opt_performance_test/src
-$ : > ../output/result.txt
+$ : > ../output/all_query_result.txt
 
 ./single_query_test.sh "match p=(n0)-[e0]->(n1)-[e1]->(n2)-[e2]->(m:keyword) return COUNT(p); "
 ./single_query_test.sh "match p=(n0)-[e0:produce]->(n1)-[e1:has_keyword]->(m) return COUNT(p); "

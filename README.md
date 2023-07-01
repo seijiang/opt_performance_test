@@ -8,5 +8,5 @@
 
 ## 运行测试Cypher
 ```
-./src/all_query_tests.sh
+./src/all_query_tests.sh <opt_performance_test文件夹所在路径>
 ```
