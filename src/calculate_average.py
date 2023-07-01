@@ -31,12 +31,15 @@ def calculate(path,cypher,graph,cycle):
             after_time+=float(time)
         else:
             before_time+=float(time)
-                
+
+    before_ave_time=before_time/cycle
+    after_ave_time=after_time/cycle
     f_res=open(path+"all_query_result.txt",'a')
     f_res.write("cypher: "+cypher+"\n")
     f_res.write("graph: "+graph+"\n")
-    f_res.write("before optimization time: "+str(before_time/cycle)+"s\n")
-    f_res.write("after optimization time: "+str(after_time/cycle)+"s\n\n")
+    f_res.write("before optimization time: "+str(before_ave_time)+"s\n")
+    f_res.write("after optimization time: "+str(after_ave_time)+"s\n")
+    f_res.write("speed up: "+str((before_ave_time-after_ave_time)/before_ave_time)+"\n\n")
     
 if __name__ == "__main__":
     if len(sys.argv)==4:
