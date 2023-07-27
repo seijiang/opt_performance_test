@@ -39,7 +39,7 @@ def calculate(path,cypher,graph,cycle):
     f_res.write("graph: "+graph+"\n")
     f_res.write("before optimization time: "+str(before_ave_time)+"s\n")
     f_res.write("after optimization time: "+str(after_ave_time)+"s\n")
-    f_res.write("speed up: "+str((before_ave_time-after_ave_time)/before_ave_time)+"\n\n")
+    f_res.write("speed up: "+str(before_ave_time/after_ave_time)+"\n\n")
     
 if __name__ == "__main__":
     if len(sys.argv)==4:
